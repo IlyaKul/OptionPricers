@@ -150,3 +150,36 @@ double PutDelta(double S, double h, double K, double T, double r, double sig, do
 double GammaGF(double S, double h, double K, double T, double r, double sig, double b) {		//Gamma Aproximation  using divided difference
 	return (CallPrice(S + h, K, T, r, sig, b) - 2 * CallPrice(S, K, T, r, sig, b) + CallPrice(S - h, K, T, r, sig, b)) / (h * h);
 }
+
+
+double PerpetualCall(double S, double K, double r, double sig, double b)
+{ // Dividend q = r - b
+
+	double sig2 = sig*sig;								//sig to the second power defined for convenience
+	double fac = b / sig2 - 0.5; fac *= fac;			//fac to the second power defined for convenience
+	double y1 = 0.5 - b / sig2 + sqrt(fac + 2.0*r / sig2);
+
+
+	if (1.0 == y1)								//no need to calculate the function if y1 equals to 1,
+		return S;
+
+	double fac2 = ((y1 - 1.0)*S) / (y1 * K);
+	double c = K * pow(fac2, y1) / (y1 - 1.0);
+
+	return c;
+}
+
+double PerpetualPut(double S, double K, double r, double sig, double b)
+{
+	double sig2 = sig*sig;
+	double fac = b / sig2 - 0.5; fac *= fac;
+	double y2 = 0.5 - b / sig2 - sqrt(fac + 2.0*r / sig2);
+
+	if (0.0 == y2)
+		return S;
+
+	double fac2 = ((y2 - 1.0)*S) / (y2 * K);
+	double p = K * pow(fac2, y2) / (1.0 - y2);
+
+	return p;
+}
