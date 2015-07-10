@@ -43,7 +43,7 @@ public:
 	void set_b(double new_b) { b = new_b; }
 
 	//Pricers (pure virtual functions)	
-	virtual double Price()const = 0;
+	//virtual double Price()const = 0;
 };
 
 
