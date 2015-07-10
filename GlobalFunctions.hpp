@@ -7,6 +7,7 @@
 
 
 #include <vector>
+using namespace std;
 
 double N(double x);
 double n(double x);
@@ -32,6 +33,8 @@ double PutDelta(double S, double h, double K, double T, double r, double sig, do
 double GammaGF(double S, double h, double K, double T, double r, double sig, double b);		//Gamma Aproximation  using divided difference
 
 
+double PerpetualCall(double K, double S, double sig, double r, double b);
+double PerpetualPut(double K, double S, double sig, double r, double b);
 
 
 std::vector<double> MeshArray(double LowerLimit, double UpperLimit, int Num);
